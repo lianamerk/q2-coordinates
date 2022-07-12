@@ -5,7 +5,7 @@
 #
 # The full license is in the file LICENSE, distributed with this software.
 # ----------------------------------------------------------------------------
-
+import shutil
 
 import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
@@ -128,3 +128,10 @@ def save_animated_map(output_dir, lat_min, lat_max, data, column):
     q2templates.render(in_path('index.html'), output_dir, context={
         'lat_min': lat_min, 'lat_max': lat_max, 'data': data,
         'column': column})
+
+
+def save_bokeh_map(output_dir):
+    # save template
+    index = join(TEMPLATES, 'bokeh_plot', 'index.html')
+    # shutil.copyfile(join(TEMPLATES, 'bokeh_plot', 'ferm.csv'), output_dir)
+    q2templates.render(index, output_dir)

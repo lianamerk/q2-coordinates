@@ -9,6 +9,8 @@
 
 from qiime2.plugin import (Str, Plugin, Metadata, Choices, Bool, Citations,
                            Int, MetadataColumn, Numeric, Range)
+
+from .bokeh_plot import plot_bokeh_map
 from .mapper import (draw_map, geodesic_distance, euclidean_distance,
                      draw_interactive_map)
 import q2_coordinates
@@ -21,6 +23,7 @@ from ._format import (CoordinatesFormat, CoordinatesDirectoryFormat,
 from ._type import (Coordinates, QuadTree)
 from .stats import autocorr
 from .qtrees import quadtree
+
 
 citations = Citations.load('citations.bib', package='q2_coordinates')
 
@@ -230,3 +233,13 @@ plugin.register_semantic_type_to_format(
     SampleData[QuadTree],
     artifact_format=QuadTreeDirectoryFormat)
 importlib.import_module('q2_coordinates._transformer')
+
+
+plugin.visualizers.register_function(
+    function=plot_bokeh_map,
+    inputs={},
+    parameters={},
+    input_descriptions={},
+    parameter_descriptions={},
+    name='Plot data on a map.',
+    description=('Bokeh Plot of data.'))
